@@ -32,26 +32,22 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       </div>
     </div>
     <nav class="nav" aria-label="Seitenabschnitte">
-      <a href="#intro">Intro</a>
-      <a href="#angebot">Angebot</a>
-      <a href="#mitmachen">Mitmachen</a>
+      <a href="#intro">Für dich</a>
+      <a href="#unterstuetzer">Für Unterstützer:innen</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
   </header>
 
   <main>
-    <section id="intro" class="hero-section section-slab section-slab--primary">
+    <section id="intro" class="hero-section section-slab section-slab--hero">
       <div class="hero-copy">
-        <p class="kicker">Zukunft ist eine Entscheidung. / Zukunft ist Arbeit.</p>
-        <h1>Wir machen aus Wollen sichtbares Handeln.</h1>
+        <p class="section-label">Intro</p>
+        <h1 class="pixel-heading collage-block collage-block--black">Deine Zukunft ist gestaltbar.</h1>
         <p class="lead">
-          Zukunftwollen ist ein offener, grafischer Raum für Projekte, Gespräche und
-          lokale Initiativen, die nicht auf später warten wollen.
+          Du fühlst dich manchmal allein, überfordert oder wie im falschen Film? Zukunftwollen zeigt dir
+          echte Menschen, echte Orte und echte Möglichkeiten in deiner Nähe – ganz ohne Umwege. Ein Chat,
+          ein paar Fragen, und du weißt, wo du andocken kannst.
         </p>
-        <div class="hero-actions">
-          <a class="button button--dark" href="#kontakt">Kontakt</a>
-          <a class="button button--ghost" href="#angebot">Mehr erfahren</a>
-        </div>
       </div>
 
       <div class="hero-art" aria-hidden="true">
@@ -65,52 +61,74 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       </div>
     </section>
 
-    <section id="angebot" class="content-grid">
-      <article class="section-slab section-slab--accent card card--tall">
-        <p class="section-label">Angebot</p>
-        <h2>Was wir tun</h2>
-        <p>
-          Wir kuratieren Ideen, geben Vorhaben Form und machen aus losen Gedanken eine
-          verständliche, einladende Struktur.
-        </p>
-        <ul class="stack-list">
-          <li>Projektseiten und Landingpages</li>
-          <li>Mitmach- und Kontaktpunkte</li>
-          <li>Visuelle Systeme mit eigenem Charakter</li>
-        </ul>
-      </article>
-
-      <article class="section-slab section-slab--neutral card card--tall">
-        <p class="section-label">Worum es geht</p>
-        <h2>Purpose, but practical.</h2>
-        <p>
-          Die Seite darf freundlich und präzise sein: klar lesbar, mutig gestaltet und
-          ohne unnötigen Ballast.
-        </p>
-        <p class="microcopy">
-          / if you can name it, you can build it / wenn wir es benennen, können wir es bauen
-        </p>
-      </article>
+    <section id="angebot" class="section-slab section-slab--accent content-section">
+      <p class="section-label">Angebot</p>
+      <h2>Frag einfach.</h2>
+      <p class="lead">
+        Unser Chatbot hört zu und findet, was zu dir passt: Gruppen, Vereine, Beratungsstellen, Events
+        oder einfach gute Nachrichten, wenn der Kopf mal News-Pause braucht. Du musst nicht wissen,
+        wonach du suchst – wir helfen dir, es herauszufinden.
+      </p>
     </section>
 
     <section id="mitmachen" class="section-slab section-slab--dark manifesto">
       <div>
         <p class="section-label">Mitmachen</p>
-        <h2>Die Einladung ist offen.</h2>
+        <h2 class="pixel-heading collage-block collage-block--black">Wir suchen dich!</h2>
       </div>
       <div class="manifesto-copy">
         <p>
-          Du bringst ein Thema, eine Vision oder nur einen ersten Satz mit. Daraus machen
-          wir eine Form, die sichtbar, verwendbar und einprägsam ist.
-        </p>
-        <p>
-          Wir arbeiten statisch, robust und ohne komplexe Abhängigkeiten. Der Look darf
-          laut sein, die Struktur bleibt klar.
+          Wir bauen diese App gerade – lokal in Freiburg, bald überall. Wenn du Lust hast, Ideen
+          einzubringen, mitzudenken oder einfach ehrlich zu sagen, was fehlt: Deine Perspektive zählt.
+          Diese Welt ist gestaltbar – und du bist eingeladen mitzumachen.
         </p>
       </div>
     </section>
 
-    <section id="kontakt" class="contact-section section-slab section-slab--primary">
+    <section id="neugierig" class="section-slab section-slab--pink cta-teaser">
+      <p class="section-label">Kontakt</p>
+      <h2 class="pixel-heading glitch-heading">Du bist neugierig?</h2>
+      <p class="lead">
+        Melde dich bei Cindy:
+        <a class="contact-link" href="mailto:cindy@zukunftwollen.org">cindy@zukunftwollen.org</a>
+      </p>
+    </section>
+
+    <section id="unterstuetzer" class="section-slab section-slab--purple section-divider">
+      <h2 class="pixel-heading collage-block collage-block--black section-divider-label">
+        <span aria-hidden="true">📋</span> Für Unterstützer:innen
+      </h2>
+    </section>
+
+    <section id="support-intro" class="section-slab section-slab--primary content-section">
+      <p class="section-label">Intro</p>
+      <p class="lead">
+        Zukunftwollen ist eine KI-gestützte Plattform, die junge Menschen (13–28) mit passgenauen
+        lokalen Angeboten für mentale Gesundheit und soziale Teilhabe verbindet – niederschwellig,
+        wirkungsorientiert und skalierbar.
+      </p>
+    </section>
+
+    <section id="support-wirkung" class="section-slab section-slab--neutral content-section">
+      <p class="section-label">Angebot / Wirkung</p>
+      <p class="lead">
+        Angesichts steigender psychischer Belastung und wachsender sozialer Isolation setzt
+        Zukunftwollen auf eine LLM-gestützte Bedarfsanalyse, die Nutzer:innen mit Vereinen,
+        Beratungsstellen, Angeboten und positiv kuratierten Inhalten vernetzt. Ziel ist die
+        Prävention von Isolation und Extremismus sowie die Stärkung demokratischer Teilhabe.
+      </p>
+    </section>
+
+    <section id="support-pilot" class="section-slab section-slab--primary content-section">
+      <p class="section-label">Mitmachen / Pilotprojekt</p>
+      <p class="lead">
+        Im Pilotjahr 2026 soll die App in Freiburg im Breisgau und Umgebung entstehen- gemeinsam mit
+        jungen Menschen und lokalen Trägern – Das Projekt ist langfristig bundesweit übertragbar
+        konzipiert.
+      </p>
+    </section>
+
+    <section id="kontakt" class="section-slab section-slab--pink contact-section">
       <div class="contact-intro">
         <p class="section-label">Kontakt</p>
         <h2>Schreib uns direkt.</h2>

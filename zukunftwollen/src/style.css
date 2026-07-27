@@ -10,6 +10,8 @@
   --accent-2: #ffbf4d;
   --accent-3: #b55cff;
   --accent-4: #ff3e7c;
+  --glitch-cyan: #47bfff;
+  --gradient-hero: linear-gradient(155deg, var(--accent-3) 0%, var(--accent) 60%, var(--accent-2) 100%);
   --line: rgba(30, 15, 22, 0.18);
   --shadow: rgba(8, 3, 9, 0.4);
   --sans: 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', sans-serif;
@@ -97,6 +99,48 @@ h2 {
   max-width: 12ch;
 }
 
+.pixel-heading {
+  text-shadow: 0.14em 0.14em 0 var(--accent-4);
+}
+
+.glitch-heading {
+  text-shadow:
+    0.1em 0 0 var(--accent-4),
+    -0.1em 0 0 var(--glitch-cyan);
+}
+
+.collage-block {
+  position: relative;
+  z-index: 1;
+}
+
+.collage-block::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -0.1em -0.3em -0.05em -0.3em;
+  transform: rotate(-2deg) translate(0.3em, 0.35em);
+  border: 4px solid var(--ink);
+}
+
+.collage-block--black::before {
+  background: var(--ink);
+}
+
+.collage-block--purple::before {
+  background: var(--accent-3);
+}
+
+.section-divider-label {
+  max-width: none;
+}
+
+.contact-link {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  font-weight: 700;
+}
+
 .skip-link {
   position: absolute;
   left: 1rem;
@@ -157,7 +201,6 @@ h2 {
 .section-label,
 .kicker,
 .contact-note,
-.microcopy,
 .brand-copy,
 .contact-strip,
 .nav a,
@@ -256,9 +299,27 @@ h2 {
     linear-gradient(180deg, rgba(23, 17, 32, 0.96), rgba(42, 15, 38, 0.96));
 }
 
+.section-slab--hero {
+  color: var(--ink);
+  background: var(--gradient-hero);
+}
+
+.section-slab--purple {
+  color: var(--ink);
+  background: var(--accent-3);
+}
+
+.section-slab--pink {
+  color: var(--ink);
+  background: var(--accent-4);
+}
+
 .hero-section,
 .contact-section,
-.manifesto {
+.manifesto,
+.content-section,
+.cta-teaser,
+.section-divider {
   display: grid;
   gap: 1.5rem;
   padding: clamp(1.25rem, 3vw, 2rem);
@@ -270,6 +331,20 @@ h2 {
   min-height: min(82vh, 900px);
 }
 
+.content-section {
+  max-width: 52rem;
+  margin: 1rem auto;
+  gap: 1rem;
+}
+
+.cta-teaser,
+.section-divider {
+  margin: 1rem 0;
+  justify-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
 .hero-copy {
   display: grid;
   gap: 1.25rem;
@@ -277,9 +352,7 @@ h2 {
 
 .lead,
 .contact-intro p,
-.manifesto-copy p,
-.card p,
-.card li {
+.manifesto-copy p {
   font-size: 1.02rem;
   line-height: 1.7;
 }
@@ -412,39 +485,11 @@ h2 {
   line-height: 1.1;
 }
 
-.content-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.card,
 .manifesto-copy,
 .contact-intro,
 .contact-form {
   display: grid;
   gap: 1rem;
-}
-
-.card {
-  padding: 1.25rem;
-}
-
-.card--tall {
-  min-height: 100%;
-}
-
-.stack-list {
-  margin: 0;
-  padding-left: 1.2rem;
-  display: grid;
-  gap: 0.6rem;
-}
-
-.microcopy {
-  padding-top: 0.4rem;
-  border-top: 2px dashed rgba(30, 15, 22, 0.34);
 }
 
 .manifesto {
@@ -568,8 +613,7 @@ h2 {
 @media (max-width: 980px) {
   .topbar,
   .hero-section,
-  .manifesto,
-  .content-grid {
+  .manifesto {
     grid-template-columns: 1fr;
     display: grid;
   }
@@ -603,8 +647,10 @@ h2 {
 
   .topbar,
   .hero-section,
-  .card,
   .contact-section,
+  .content-section,
+  .cta-teaser,
+  .section-divider,
   .manifesto {
     padding: 1rem;
   }
@@ -638,7 +684,7 @@ h2 {
     min-width: 0;
   }
 
-  .content-grid {
+  .content-section {
     margin-top: 0;
   }
 
