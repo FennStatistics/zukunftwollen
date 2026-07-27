@@ -1,60 +1,241 @@
 import './style.css'
-import typescriptLogo from './assets/typescript.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import { setupCounter } from './counter.ts'
+
+const contactEmail = String.fromCharCode(
+  99,
+  105,
+  110,
+  100,
+  121,
+  102,
+  108,
+  117,
+  99,
+  107,
+  105,
+  103,
+  101,
+  114,
+  64,
+  103,
+  109,
+  97,
+  105,
+  108,
+  46,
+  99,
+  111,
+  109,
+)
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${typescriptLogo}" class="framework" alt="TypeScript logo"/>
-    <img src="${viteLogo}" class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.ts</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+<a class="skip-link" href="#kontakt">Zum Kontakt springen</a>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <div>
+        <p class="eyebrow">zukunftwollen / future wanting</p>
+        <p class="brand-copy">Eine kleine Plattform für klare Schritte, gemeinsames Handeln und eine menschlichere Zukunft.</p>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Seitenabschnitte">
+      <a href="#intro">Intro</a>
+      <a href="#angebot">Angebot</a>
+      <a href="#mitmachen">Mitmachen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
 
-<div class="ticks"></div>
+  <main>
+    <section id="intro" class="hero-section section-slab section-slab--primary">
+      <div class="hero-copy">
+        <p class="kicker">Zukunft ist eine Entscheidung. / Zukunft ist Arbeit.</p>
+        <h1>Wir machen aus Wollen sichtbares Handeln.</h1>
+        <p class="lead">
+          Zukunftwollen ist ein offener, grafischer Raum für Projekte, Gespräche und
+          lokale Initiativen, die nicht auf später warten wollen.
+        </p>
+        <div class="hero-actions">
+          <a class="button button--dark" href="#kontakt">Kontakt</a>
+          <a class="button button--ghost" href="#angebot">Mehr erfahren</a>
+        </div>
+      </div>
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src="${viteLogo}" alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://www.typescriptlang.org" target="_blank">
-          <img class="button-icon" src="${typescriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
+      <div class="hero-art" aria-hidden="true">
+        <div class="pixel-orb pixel-orb--large"></div>
+        <div class="pixel-orb pixel-orb--small"></div>
+        <div class="hero-panel">
+          <p>collective energy</p>
+          <span>local action</span>
+          <span>shared future</span>
+        </div>
+      </div>
+    </section>
 
-<div class="ticks"></div>
-<section id="spacer"></section>
+    <section id="angebot" class="content-grid">
+      <article class="section-slab section-slab--accent card card--tall">
+        <p class="section-label">Angebot</p>
+        <h2>Was wir tun</h2>
+        <p>
+          Wir kuratieren Ideen, geben Vorhaben Form und machen aus losen Gedanken eine
+          verständliche, einladende Struktur.
+        </p>
+        <ul class="stack-list">
+          <li>Projektseiten und Landingpages</li>
+          <li>Mitmach- und Kontaktpunkte</li>
+          <li>Visuelle Systeme mit eigenem Charakter</li>
+        </ul>
+      </article>
+
+      <article class="section-slab section-slab--neutral card card--tall">
+        <p class="section-label">Worum es geht</p>
+        <h2>Purpose, but practical.</h2>
+        <p>
+          Die Seite darf freundlich und präzise sein: klar lesbar, mutig gestaltet und
+          ohne unnötigen Ballast.
+        </p>
+        <p class="microcopy">
+          / if you can name it, you can build it / wenn wir es benennen, können wir es bauen
+        </p>
+      </article>
+    </section>
+
+    <section id="mitmachen" class="section-slab section-slab--dark manifesto">
+      <div>
+        <p class="section-label">Mitmachen</p>
+        <h2>Die Einladung ist offen.</h2>
+      </div>
+      <div class="manifesto-copy">
+        <p>
+          Du bringst ein Thema, eine Vision oder nur einen ersten Satz mit. Daraus machen
+          wir eine Form, die sichtbar, verwendbar und einprägsam ist.
+        </p>
+        <p>
+          Wir arbeiten statisch, robust und ohne komplexe Abhängigkeiten. Der Look darf
+          laut sein, die Struktur bleibt klar.
+        </p>
+      </div>
+    </section>
+
+    <section id="kontakt" class="contact-section section-slab section-slab--primary">
+      <div class="contact-intro">
+        <p class="section-label">Kontakt</p>
+        <h2>Schreib uns direkt.</h2>
+        <p>
+          Das Formular öffnet beim Absenden eine E-Mail an ${contactEmail}.
+          Zum Schutz gegen Spam sind ein Honeypot, eine minimale Wartezeit und eine
+          Frontend-Bremse aktiv.
+        </p>
+        <p class="contact-note">English: send a message, start a conversation, build something useful.</p>
+      </div>
+
+      <form id="contact-form" class="contact-form" novalidate>
+        <label>
+          <span>Name</span>
+          <input name="name" type="text" autocomplete="name" placeholder="Dein Name" required />
+        </label>
+
+        <label>
+          <span>E-Mail</span>
+          <input name="email" type="email" autocomplete="email" placeholder="deine@mail.de" required />
+        </label>
+
+        <label>
+          <span>Nachricht</span>
+          <textarea name="message" rows="6" placeholder="Worum geht es?" required></textarea>
+        </label>
+
+        <label class="hp-field" aria-hidden="true">
+          <span>Website</span>
+          <input name="website" type="text" tabindex="-1" autocomplete="off" />
+        </label>
+
+        <input type="hidden" name="startedAt" value="${Date.now()}" />
+
+        <div class="form-footer">
+          <button type="submit" class="button button--dark">Mail senden</button>
+          <p class="form-status" id="form-status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="contact-strip">
+        <span>human first</span>
+        <span>pixel second</span>
+        <span>static by design</span>
+      </div>
+    </section>
+  </main>
+</div>
 `
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const contactForm = document.querySelector<HTMLFormElement>('#contact-form')
+const statusElement = document.querySelector<HTMLElement>('#form-status')
+
+const minimumDelayMs = 3200
+const submissionCooldownMs = 20000
+const submissionKey = 'zukunftwollen:last-form-submit'
+
+function setStatus(message: string, tone: 'info' | 'error' | 'success' = 'info') {
+  if (!statusElement) {
+    return
+  }
+
+  statusElement.textContent = message
+  statusElement.dataset.tone = tone
+}
+
+function buildMailtoUrl(name: string, email: string, message: string) {
+  const subject = `Zukunftwollen Kontakt: ${name}`
+  const body = [
+    `Name: ${name}`,
+    `E-Mail: ${email}`,
+    '',
+    message,
+  ].join('\n')
+
+  return `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+}
+
+contactForm?.addEventListener('submit', (event) => {
+  event.preventDefault()
+
+  const formData = new FormData(contactForm)
+  const name = String(formData.get('name') ?? '').trim()
+  const email = String(formData.get('email') ?? '').trim()
+  const message = String(formData.get('message') ?? '').trim()
+  const trapValue = String(formData.get('website') ?? '').trim()
+  const startedAt = Number(formData.get('startedAt') ?? '0')
+  const elapsed = Date.now() - startedAt
+  const lastSubmission = Number(window.localStorage.getItem(submissionKey) ?? '0')
+  const cooldownRemaining = Date.now() - lastSubmission < submissionCooldownMs
+
+  if (trapValue) {
+    setStatus('Die Nachricht konnte nicht gesendet werden.', 'error')
+    return
+  }
+
+  if (cooldownRemaining) {
+    setStatus('Bitte warte einen Moment, bevor du erneut sendest.', 'error')
+    return
+  }
+
+  if (elapsed < minimumDelayMs) {
+    setStatus('Bitte fülle das Formular noch einmal etwas ruhiger aus.', 'error')
+    return
+  }
+
+  if (!name || !email || !message) {
+    setStatus('Bitte fülle Name, E-Mail und Nachricht aus.', 'error')
+    return
+  }
+
+  if (!contactForm.checkValidity()) {
+    contactForm.reportValidity()
+    setStatus('Bitte prüfe deine Eingaben.', 'error')
+    return
+  }
+
+  window.localStorage.setItem(submissionKey, String(Date.now()))
+  setStatus('Die Mail wird geöffnet.', 'success')
+  window.location.href = buildMailtoUrl(name, email, message)
+})
