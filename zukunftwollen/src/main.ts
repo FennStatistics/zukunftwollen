@@ -1,31 +1,24 @@
+import emailjs from '@emailjs/browser'
 import './style.css'
 
-const contactEmail = String.fromCharCode(
-  99,
-  105,
-  110,
-  100,
-  121,
-  102,
-  108,
-  117,
-  99,
-  107,
-  105,
-  103,
-  101,
-  114,
-  64,
-  103,
-  109,
-  97,
-  105,
-  108,
-  46,
-  99,
-  111,
-  109,
-)
+const emailJsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const emailJsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const emailJsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+// Trage die Werte aus dem EmailJS-Dashboard in eine lokale `.env`-Datei ein:
+// VITE_EMAILJS_SERVICE_ID=...
+// VITE_EMAILJS_TEMPLATE_ID=...
+// VITE_EMAILJS_PUBLIC_KEY=...
+if (emailJsPublicKey) {
+  emailjs.init({
+    publicKey: emailJsPublicKey,
+    blockHeadless: true,
+    limitRate: {
+      id: 'zukunftwollen-contact-form',
+      throttle: 10000,
+    },
+  })
+}
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 <a class="skip-link" href="#kontakt">Zum Kontakt springen</a>
@@ -122,9 +115,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <p class="section-label">Kontakt</p>
         <h2>Schreib uns direkt.</h2>
         <p>
-          Das Formular öffnet beim Absenden eine E-Mail an ${contactEmail}.
-          Zum Schutz gegen Spam sind ein Honeypot, eine minimale Wartezeit und eine
-          Frontend-Bremse aktiv.
+          Das Formular sendet direkt über EmailJS. Zum Schutz gegen Spam sind eine
+          minimale Wartezeit, ein Honeypot und eine Frontend-Bremse aktiv.
         </p>
         <p class="contact-note">English: send a message, start a conversation, build something useful.</p>
       </div>
@@ -132,17 +124,17 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <form id="contact-form" class="contact-form" novalidate>
         <label>
           <span>Name</span>
-          <input name="name" type="text" autocomplete="name" placeholder="Dein Name" required />
+          <input name="name" type="text" autocomplete="name" placeholder="Dein Name" required aria-describedby="form-status" />
         </label>
 
         <label>
           <span>E-Mail</span>
-          <input name="email" type="email" autocomplete="email" placeholder="deine@mail.de" required />
+          <input name="email" type="email" autocomplete="email" placeholder="deine@mail.de" required aria-describedby="form-status" />
         </label>
 
         <label>
           <span>Nachricht</span>
-          <textarea name="message" rows="6" placeholder="Worum geht es?" required></textarea>
+          <textarea name="message" rows="6" placeholder="Worum geht es?" required aria-describedby="form-status"></textarea>
         </label>
 
         <label class="hp-field" aria-hidden="true">
@@ -153,8 +145,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <input type="hidden" name="startedAt" value="${Date.now()}" />
 
         <div class="form-footer">
-          <button type="submit" class="button button--dark">Mail senden</button>
-          <p class="form-status" id="form-status" aria-live="polite"></p>
+          <button type="submit" class="button button--dark" id="submit-button">
+            <span class="button-label">Mail senden</span>
+            <span class="button-spinner" aria-hidden="true"></span>
+          </button>
+          <p class="form-status" id="form-status" aria-live="polite" aria-atomic="true"></p>
         </div>
       </form>
 
@@ -170,9 +165,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
 const contactForm = document.querySelector<HTMLFormElement>('#contact-form')
 const statusElement = document.querySelector<HTMLElement>('#form-status')
+const submitButton = document.querySelector<HTMLButtonElement>('#submit-button')
+const buttonLabel = document.querySelector<HTMLElement>('.button-label')
 
 const minimumDelayMs = 3200
-const submissionCooldownMs = 20000
+const submissionCooldownMs = 10000
 const submissionKey = 'zukunftwollen:last-form-submit'
 
 function setStatus(message: string, tone: 'info' | 'error' | 'success' = 'info') {
@@ -184,20 +181,29 @@ function setStatus(message: string, tone: 'info' | 'error' | 'success' = 'info')
   statusElement.dataset.tone = tone
 }
 
-function buildMailtoUrl(name: string, email: string, message: string) {
-  const subject = `Zukunftwollen Kontakt: ${name}`
-  const body = [
-    `Name: ${name}`,
-    `E-Mail: ${email}`,
-    '',
-    message,
-  ].join('\n')
+function setLoading(isLoading: boolean) {
+  if (submitButton) {
+    submitButton.disabled = isLoading
+    submitButton.setAttribute('aria-busy', String(isLoading))
+  }
 
-  return `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  if (buttonLabel) {
+    buttonLabel.textContent = isLoading ? 'Sende …' : 'Mail senden'
+  }
+}
+
+function ensureEmailJsConfiguration() {
+  if (!emailJsServiceId || !emailJsTemplateId || !emailJsPublicKey) {
+    throw new Error('EmailJS ist nicht konfiguriert.')
+  }
 }
 
 contactForm?.addEventListener('submit', (event) => {
   event.preventDefault()
+
+  if (!contactForm) {
+    return
+  }
 
   const formData = new FormData(contactForm)
   const name = String(formData.get('name') ?? '').trim()
@@ -236,6 +242,43 @@ contactForm?.addEventListener('submit', (event) => {
   }
 
   window.localStorage.setItem(submissionKey, String(Date.now()))
-  setStatus('Die Mail wird geöffnet.', 'success')
-  window.location.href = buildMailtoUrl(name, email, message)
+
+  const existingUserReplyTo = formData.get('reply_to')
+  if (!existingUserReplyTo) {
+    const replyToField = contactForm.querySelector<HTMLInputElement>('input[name="reply_to"]')
+    if (!replyToField) {
+      const hiddenReplyTo = document.createElement('input')
+      hiddenReplyTo.type = 'hidden'
+      hiddenReplyTo.name = 'reply_to'
+      hiddenReplyTo.value = email
+      contactForm.append(hiddenReplyTo)
+    } else {
+      replyToField.value = email
+    }
+  }
+
+  setLoading(true)
+  setStatus('Die Nachricht wird gesendet …', 'info')
+
+  void (async () => {
+    try {
+      ensureEmailJsConfiguration()
+
+      const response = await emailjs.sendForm(emailJsServiceId, emailJsTemplateId, contactForm)
+
+      if (response.status >= 200 && response.status < 300) {
+        contactForm.reset()
+        contactForm.querySelector<HTMLInputElement>('input[name="startedAt"]')!.value = String(Date.now())
+        setStatus('Danke, die Nachricht wurde gesendet.', 'success')
+        return
+      }
+
+      throw new Error(response.text || 'Unbekannter EmailJS-Fehler')
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Die Nachricht konnte nicht gesendet werden.'
+      setStatus(`Fehler: ${message}`, 'error')
+    } finally {
+      setLoading(false)
+    }
+  })()
 })
