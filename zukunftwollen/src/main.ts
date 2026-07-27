@@ -85,15 +85,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       </div>
     </section>
 
-    <section id="neugierig" class="section-slab section-slab--pink cta-teaser">
-      <p class="section-label">Kontakt</p>
-      <h2 class="pixel-heading glitch-heading">Du bist neugierig?</h2>
-      <p class="lead">
-        Melde dich bei Cindy:
-        <a class="contact-link" href="mailto:cindy@zukunftwollen.org">cindy@zukunftwollen.org</a>
-      </p>
-    </section>
-
     <section id="unterstuetzer" class="section-slab section-slab--purple section-divider">
       <h2 class="pixel-heading collage-block collage-block--black section-divider-label">
         <span aria-hidden="true">📋</span> Für Unterstützer:innen
@@ -132,10 +123,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <div class="contact-intro">
         <p class="section-label">Kontakt</p>
         <h2>Schreib uns direkt.</h2>
-        <p>
-          Das Formular sendet direkt über EmailJS. Zum Schutz gegen Spam sind eine
-          minimale Wartezeit, ein Honeypot und eine Frontend-Bremse aktiv.
-        </p>
         <p class="contact-note">English: send a message, start a conversation, build something useful.</p>
       </div>
 
